@@ -7,6 +7,8 @@
     "dev": "eleventy --serve"
   },
   "dependencies": {
-    "@11ty/eleventy": "0.12.1"
+    "@11ty/eleventy": "0.12.1",
+    "got": "11.8.3",
+    "octokit": "1.7.1"
   }
 }

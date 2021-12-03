@@ -24,7 +24,7 @@ export default async function handler(req, res) {
       }),
     ]);
 
-    const newBranch = Date.now();
+    const newBranch = `${Date.now()}`;
     await octokit.rest.git.createRef({
       owner,
       repo,
@@ -32,17 +32,25 @@ export default async function handler(req, res) {
       sha: masterBranch.commit.sha,
     });
 
-    const { status } = await octokit.rest.repos.createOrUpdateFileContents({
+    await octokit.rest.repos.createOrUpdateFileContents({
       owner,
       repo,
       path: "_data/posts.csv",
       content: Buffer.from(JSON.stringify(req.body)).toString("base64"),
       message: "Data update",
       sha: currentFile.sha,
-      branch: `${newBranch}`,
+      branch: newBranch,
     });
 
-    res.status(status).end();
+    await octokit.rest.pulls.create({
+      owner,
+      repo,
+      base: "master",
+      head: newBranch,
+      title: "New data",
+    });
+
+    res.status(201).end();
   } catch (error) {
     res.status(500).json(error);
   }

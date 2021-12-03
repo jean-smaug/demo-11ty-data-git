@@ -20,7 +20,7 @@ export default async function handler(req, res) {
       octokit.rest.repos.getContent({
         owner,
         repo,
-        path: "_data/posts.json",
+        path: "_data/posts.csv",
       }),
     ]);
 
@@ -35,7 +35,7 @@ export default async function handler(req, res) {
     const { status } = await octokit.rest.repos.createOrUpdateFileContents({
       owner,
       repo,
-      path: "_data/posts.json",
+      path: "_data/posts.csv",
       content: Buffer.from(JSON.stringify(req.body)).toString("base64"),
       message: "Data update",
       sha: currentFile.sha,

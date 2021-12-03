@@ -1,6 +1,9 @@
 <ul>
   {% for post in posts %}
-  <li>{{ post }}</li>
+  <li>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.description }}</p>
+  </li>
   {% else %}
   <li>This would display if the 'item' collection were empty</li>
   {% endfor %}

@@ -1,0 +1,12 @@
+{
+  "name": "eleventy-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "eleventy --serve"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "0.12.1"
+  }
+}

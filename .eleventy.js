@@ -10,5 +10,11 @@ module.exports = function (eleventyConfig) {
     return records;
   });
 
+  // https://github.com/11ty/eleventy/issues/768#issuecomment-553611038
+  eleventyConfig.addPassthroughCopy({
+    "node_modules/bootstrap/dist/css/bootstrap.min.css": "bootstrap.min.css",
+    "node_modules/bootstrap/dist/js/bootstrap.min.js": "bootstrap.min.js",
+  });
+
   return eleventyConfig;
 };

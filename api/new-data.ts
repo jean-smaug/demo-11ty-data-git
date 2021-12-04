@@ -36,7 +36,9 @@ export default async function handler(req, res) {
       owner,
       repo,
       path: "_data/posts.csv",
-      content: Buffer.from(req.body).toString("base64"),
+      content: Buffer.from(
+        `${Buffer.from(currentFile.content, "base64").toString()}\n${req.body}`
+      ).toString("base64"),
       message: "Data update",
       sha: currentFile.sha,
       branch: newBranch,

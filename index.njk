@@ -3,11 +3,16 @@ layout: layout.njk
 title: salut smaug
 ---
 
+<p>{{ page | dump }}</p>
+
 <ul>
   {% for post in posts %}
   <li>
     <h2>{{ post.title }}</h2>
     <p>{{ post.description }}</p>
+    <a href="/posts/{{ post.title | slug }}" class="btn btn-primary"
+      >Voir l'article</a
+    >
   </li>
   {% else %}
   <li>This would display if the 'item' collection were empty</li>

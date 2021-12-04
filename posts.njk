@@ -1,11 +1,15 @@
 ---
-layout: layout.njk
 title: Titre index
+layout: layout.njk
 pagination:
   data: posts
-  size: 4
+  size: 12
   alias: post
+permalink: "posts/page-{{pagination.pageNumber+1}}/index.html"
 ---
+
+<a class="btn btn-primary" href="{{ pagination.href.previous }}">Précédent</a>
+<a class="btn btn-primary" href="{{ pagination.href.next }}">Suivant</a>
 
 <ul>
   {% for post in pagination.items %}

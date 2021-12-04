@@ -48,10 +48,15 @@ pagination:
 </ul>
 
 <script>
+  let isSubmitting = false;
+
   document.getElementById("form").addEventListener("submit", (ev) => {
     ev.preventDefault();
 
+    if (isSubmitting) return;
+
     const formData = new FormData(ev.target);
+    isSubmitting = true;
 
     fetch("/api/new-data", {
       method: "POST",
@@ -59,10 +64,13 @@ pagination:
     })
       .then(() => {
         alert("Upload OK");
+
+        isSubmitting = false;
       })
       .catch((e) => {
         console.log(e);
         alert("Oups");
+        isSubmitting = false;
       });
   });
 </script>

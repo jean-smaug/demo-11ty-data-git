@@ -4,9 +4,9 @@ const owner = "jean-smaug";
 const repo = "demo-11ty-data-git";
 
 export default async function handler(req, res) {
-  if (!req.body) {
-    res.status(401).json({
-      message: "Body can't be empty",
+  if (typeof req.body !== "string") {
+    return res.status(401).json({
+      message: "Body must be plain text",
     });
   }
 
@@ -36,7 +36,7 @@ export default async function handler(req, res) {
       owner,
       repo,
       path: "_data/posts.csv",
-      content: Buffer.from(JSON.stringify(req.body)).toString("base64"),
+      content: Buffer.from(req.body).toString("base64"),
       message: "Data update",
       sha: currentFile.sha,
       branch: newBranch,
@@ -52,6 +52,6 @@ export default async function handler(req, res) {
 
     res.status(201).end();
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({ message: error.message });
   }
 }
